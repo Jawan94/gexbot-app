@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 function getFilePathForDate() {
     const date = new Date();
     const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
-    return `C:/GexBotData/output-${formattedDate}.csv`;
+    return `/Users/habibajassim/GexBotData/output-${formattedDate}.csv`;
 }
 
 // Define the CSV file path, adjust as needed
