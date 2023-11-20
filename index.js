@@ -12,8 +12,15 @@ const app = express();
 app.use(bodyParser.json()); 
 */
 
+// Function to generate file path based on current date
+function getFilePathForDate() {
+    const date = new Date();
+    const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+    return `C:/GexBotData/output-${formattedDate}.csv`;
+}
+
 // Define the CSV file path, adjust as needed
-const csvFilePath = 'C:/GexBotData/output.csv';
+const csvFilePath = getFilePathForDate();
 
 const csvHeaders = {
     timestamp: 'TIMESTAMP',
@@ -28,10 +35,9 @@ const csvHeaders = {
     net_gex_oi: 'NET_GEX_OI'
 };
 
-
 // CSV Writer setup
 const csvWriter = createObjectCsvWriter({
-    path: csvFilePath, 
+    path: csvFilePath,
     header: [
         { id: 'timestamp', title: 'timestamp' },
         { id: 'ticker', title: 'TICKER' },
