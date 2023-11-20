@@ -34,6 +34,7 @@ async function fetchAndSaveData() {
     try {
         const response = await axios.get("https://api.gexbot.com/spx/gex/all/majors?key=Ly9ffs5JCG7w");
         const data = response.data;
+        console.log("Fetched latest data:")
         console.log([data]);
         tryWriteData([data], 0);
     } catch (error) {
@@ -55,8 +56,11 @@ async function tryWriteData(data, attempt) {
     }
 }
 
-// Schedule the task to run every 2 minutes
-cron.schedule('*/2 * * * *', fetchAndSaveData);
+// Schedule the task to run every 2 minutes between 9am - 5pm every day only.
+cron.schedule('*/2 9-16 * * *', fetchAndSaveData);
+
+// Schedule the task to run every 2 minutes all day
+// cron.schedule('*/2 * * * *', fetchAndSaveData);
 
 /* Start the server
 server.listen(port, "127.0.0.1", () => {
